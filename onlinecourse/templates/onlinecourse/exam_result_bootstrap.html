@@ -37,18 +37,29 @@
 
 <div class="container-fluid">
     {% if grade > 80 %}
-    <div class="alert alert-success">
+    <div class="alert alert-success bg-success">
        <!--HINT Display passed info -->
+       <b> Congratulations {{ user.first_name }}! </b>
+       <p> You have passed the exam and completed the course with score {{grade}} / 100</p>
     </div>
         {% else %}
-        <div class="alert alert-danger">
+        <div class="alert alert-danger bg-danger">
             <!--HINT Display failed info -->
+            <b> Failed </b>
+            <p> Sorry, {{ user.first_name }}! You have failed the exam with score {{grade}} / 100</p>
         </div>
         <a class="btn btn-link text-danger" href="{% url 'onlinecourse:course_details' course.id %}">Re-test</a>
         {% endif %}
         <div class="card-columns-vertical mt-1">
         <h5 class="">Exam results</h5>
             <!--HINT Display exam results-->
+            {% for choice in selected_ids.lesson_set.all %}
+                {% if choice.is_correct %}
+                    <p class="text-success">Correct answer: {{choice.choice_text}}</p>
+                {% else %}
+                    <p class="text-warning">Answer not selected</p>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 </body>
