@@ -144,8 +144,9 @@ def show_exam_result(request, course_id, submission_id):
     submission = get_object_or_404(Submission, pk=submission_id)
     selected_choices_ids = submission.choices.all()
     grade = 0
-    max_grade = 8
+    max_grade = 0
     for question in course.question_set.all():
+        max_grade += question.question_grade
         if question.is_get_score(selected_choices_ids):
             grade += question.question_grade
     context['course'] = course
