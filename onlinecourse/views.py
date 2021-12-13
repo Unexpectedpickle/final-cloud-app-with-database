@@ -151,5 +151,5 @@ def show_exam_result(request, course_id, submission_id):
             grade += question.question_grade
     context['course'] = course
     context['selected_ids'] = selected_choices_ids
-    context['grade'] = int(grade / max_grade) * 100
+    context['grade'] = int((grade / max_grade) * 100)
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
